@@ -6,9 +6,9 @@ let testMessage = 'teste etset aaazzz biblioteconomia !a%34235basd@ ddd8583aci3 
 
 function callCypher (operator, message) {
 
-  let codifiedString = [];
+  let codifiedMessage = [];
   // test purposes, the values will be implemented through a functional HTML input
-  let codeKey = 1;
+  let codeKey = 4;
   let codifyString = message;
 
   // use 1 for CYPHERING THE MESSAGE; otherwise, use any other value for decoding a cypher - for good practices, opt for using the number 2 for decoding
@@ -16,21 +16,21 @@ function callCypher (operator, message) {
     codeKey = -codeKey;
   }
 
-  codifyString = codifyString.toUpperCase();
+  message = message.toUpperCase();
 
-  for (i = 0; i < codifyString.length; i++){
+  for (i = 0; i < message.length; i++){
     if (typeof codeKey !== 'number') {
       console.log("Invalid codification value! Please insert a number!")
       return
     }
 
-    let letterIndex = alphabet.indexOf(codifyString[i]);
+    let letterIndex = alphabet.indexOf(message[i]);
     let codeLetterIndex = letterIndex + codeKey;
 
-    if (codifyString[i] === ' ') {
-      codifiedString = codifiedString + ' ';
+    if (message[i] === ' ') {
+      codifiedMessage = codifiedMessage + ' ';
     } else if (letterIndex === -1) { // Checks for undefined values
-      codifiedString = codifiedString + '?';
+      codifiedMessage = codifiedMessage + '?';
     } else {
     // This IF loops the alphabet vector when the codeLetterIndex goes higher/lower than the possible values (0 to 26). FUNCTIONAL BUT NOT OPTIMIZED, BE CAREFUL!
       if (codeLetterIndex > 25 || codeLetterIndex < 0){
@@ -41,10 +41,10 @@ function callCypher (operator, message) {
           codeLetterIndex = codeLetterIndex + 26;
         }
       }
-      codifiedString = codifiedString + alphabet[codeLetterIndex];
+      codifiedMessage = codifiedMessage + alphabet[codeLetterIndex];
    }
  }
- return codifiedString.toLowerCase();
+ return codifiedMessage.toLowerCase();
 }
 
 // Calling with variables
