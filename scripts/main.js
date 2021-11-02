@@ -1,14 +1,17 @@
 // GLOBAL CONSTANT VARIABLES
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-// TEST VARIABLES
-let testMessage = 'teste etset aaazzz biblioteconomia !a%34235basd@ ddd8583aci3 0@Ç^~ AaAaAAAaA'
+// BUTTONS!
+const codifyButton = document.querySelector('#codify-button');
+const decodifyButton = document.querySelector('#decodify-button');
+const randomButton = document.querySelector('#button-randomize');
+
 
 function callCypher (operator, message) {
 
   let codifiedMessage = [];
   // test purposes, the values will be implemented through a functional HTML input
-  let codeKey = 4;
+  let codeKey = parseFloat(document.getElementById('codekey-input').value) || 0;
   let codifyString = message;
 
   // use 1 for CYPHERING THE MESSAGE; otherwise, use any other value for decoding a cypher - for good practices, opt for using the number 2 for decoding
@@ -30,12 +33,12 @@ function callCypher (operator, message) {
     if (message[i] === ' ') {
       codifiedMessage = codifiedMessage + ' ';
     } else if (letterIndex === -1) { // Checks for undefined values
-      codifiedMessage = codifiedMessage + '?';
+      codifiedMessage = codifiedMessage + '#';
     } else {
     // This IF loops the alphabet vector when the codeLetterIndex goes higher/lower than the possible values (0 to 26). FUNCTIONAL BUT NOT OPTIMIZED, BE CAREFUL!
       if (codeLetterIndex > 25 || codeLetterIndex < 0){
         while (codeLetterIndex > 25) {
-          codeLetterIndex = codeLetterIndex - 26;
+          codeLetterIndex = codeLetterIndex % 26;
         }
         while (codeLetterIndex < 0) {
           codeLetterIndex = codeLetterIndex + 26;
@@ -47,11 +50,21 @@ function callCypher (operator, message) {
  return codifiedMessage.toLowerCase();
 }
 
-// Calling with variables
-console.log(callCypher(1, testMessage));
-let codifiedMessage= callCypher(1, testMessage);
-console.log(callCypher(2, codifiedMessage));
+codifyButton.addEventListener('click', button => {
+  let messageToCode = document.getElementById('message-input').value || 'Hello World';
+  let resultCodifiedMessage =  callCypher(1, messageToCode);
+  document.getElementById('message-output').innerText = resultCodifiedMessage;
+})
 
-// Calling with strings
-console.log(callCypher(1, 'Isso foi uma mensagem de teste'));
-console.log(callCypher(2, callCypher(1,'Isso foi uma mensagem de teste')));
+decodifyButton.addEventListener('click', button => {
+  let messageToCode = document.getElementById('message-input').value || 'Hello World';
+  let resultCodifiedMessage =  callCypher(2, messageToCode);
+  document.getElementById('message-output').innerText = resultCodifiedMessage;
+})
+
+randomButton.addEventListener('click', button => {
+  let randomCodeKey = Math.floor(Math.random() * 26)
+  let randomizeSignal = Math.floor(Math.random() * 2)
+  if (randomizeSignal > 0.5) { randomCodeKey = -randomCodeKey; }
+  document.getElementById('codekey-input').value = randomCodeKey;
+})
