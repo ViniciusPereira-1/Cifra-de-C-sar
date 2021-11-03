@@ -9,9 +9,7 @@ Feito para fins recreativos.
 Code Comments in English!
 
 To-Do List:
-a) Melhorar UX/UI (CSS);
-b) Tornar o site responsivo;
-c) Inserir botão para limpar/resetar os campos;
+b) Tornar o site responsive;
 _____________________________________________
 
 FAQ
